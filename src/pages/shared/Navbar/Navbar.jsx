@@ -1,14 +1,21 @@
 import React from "react";
+
+import { NavLink } from "react-router";
+import { IoNotificationsOutline } from "react-icons/io5";
 import Logo from "../Logo/Logo";
 
 const Navbar = () => {
   const navItems = (
     <>
       <li>
-        <a>Home</a>
+        <NavLink className="lato btn btn-neutral btn-outline text-sm lg:text-xl  text-text">
+          Home
+        </NavLink>
       </li>
       <li>
-        <a>Membership</a>
+        <NavLink className="lato btn btn-neutral btn-outline text-sm lg:text-xl text-text">
+          Membership
+        </NavLink>
       </li>
     </>
   );
@@ -16,7 +23,11 @@ const Navbar = () => {
     <div className="navbar bg-navFooter ">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost lg:hidden  px-0"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -35,7 +46,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-navFooter gap-3 items-center rounded-box z-1 mt-3  p-2 shadow space-x-4"
           >
             {navItems}
           </ul>
@@ -45,10 +56,15 @@ const Navbar = () => {
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{navItems}</ul>
+        <ul className="menu menu-horizontal px-1 space-x-6">{navItems}</ul>
       </div>
-      <div className="navbar-end">
-        <a className="btn">Button</a>
+      <div className="navbar-end ">
+        <IoNotificationsOutline className="text-xl lg:text-5xl mr-1 lg:mr-3 hover:text-white" />
+        <button class="lato font-semibold relative inline-flex items-center justify-center  overflow-hidden  text-[10px] lg:text-xl  text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white ">
+          <span class="relative px-2 lg:px-5 py-1 lg:py-2.5 transition-all ease-in duration-75 bg-Accent  rounded-md group-hover:bg-transparent ">
+            Join US
+          </span>
+        </button>
       </div>
     </div>
   );
