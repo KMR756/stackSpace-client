@@ -8,12 +8,26 @@ const Navbar = () => {
   const navItems = (
     <>
       <li>
-        <NavLink className="lato btn btn-neutral btn-outline text-sm lg:text-xl  text-text">
+        <NavLink
+          to={"/"}
+          className={({ isActive }) =>
+            isActive
+              ? "lato btn btn-neutral  text-sm lg:text-xl  text-text"
+              : "lato btn btn-neutral btn-outline text-sm lg:text-xl  text-text"
+          }
+        >
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink className="lato btn btn-neutral btn-outline text-sm lg:text-xl text-text">
+        <NavLink
+          to={"/membership"}
+          className={({ isActive }) =>
+            isActive
+              ? "lato btn btn-neutral  text-sm lg:text-xl  text-text"
+              : "lato btn btn-neutral btn-outline text-sm lg:text-xl  text-text"
+          }
+        >
           Membership
         </NavLink>
       </li>

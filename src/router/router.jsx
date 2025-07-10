@@ -6,6 +6,7 @@ import Registration from "../pages/Registration/Registration";
 import Login from "../pages/Login/Login";
 import Error from "../pages/shared/Error/Error";
 import Loading from "../pages/shared/Loading/Loading";
+import Membership from "../pages/Membership/Membership";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+      {
+        path: "membership",
+        Component: Membership,
       },
     ],
   },
@@ -34,9 +39,5 @@ export const router = createBrowserRouter([
         Component: Login,
       },
     ],
-  },
-  {
-    path: "loading",
-    Component: Loading,
   },
 ]);
