@@ -10,7 +10,7 @@ const FloatingIcons = () => {
       id: 1,
       icon: <FaReact className="text-blue-400" />,
       top: "10%",
-      left: "15%",
+      left: "5%",
     },
     {
       id: 2,
@@ -30,21 +30,27 @@ const FloatingIcons = () => {
       id: 4,
       icon: <FaJava className="text-red-600" />,
       top: "55%",
-      left: "65%",
+      left: "94%",
     },
 
     // JavaScript
-    // {
-    //   id: 5,
-    //   icon: <FaJsSquare className="text-yellow-400" />,
-    //   top: "60%",
-    //   left: "30%",
-    // },
+    {
+      id: 5,
+      icon: <FaJsSquare className="text-yellow-400" />,
+      top: "60%",
+      left: "84%",
+    },
     {
       id: 6,
       icon: <FaJsSquare className="text-yellow-400" />,
-      top: "75%",
+      top: "70%",
       left: "20%",
+    },
+    {
+      id: 6,
+      icon: <FaJsSquare className="text-yellow-400" />,
+      top: "60%",
+      left: "3%",
     },
 
     // C
@@ -52,7 +58,7 @@ const FloatingIcons = () => {
       id: 7,
       icon: <FaCuttlefish className="text-gray-300" />,
       top: "75%",
-      left: "55%",
+      left: "76%",
     },
     {
       id: 8,
@@ -68,12 +74,18 @@ const FloatingIcons = () => {
       top: "35%",
       left: "80%",
     },
-    // {
-    //   id: 10,
-    //   icon: <SiCplusplus className="text-blue-600" />,
-    //   top: "15%",
-    //   left: "90%",
-    // },
+    {
+      id: 10,
+      icon: <SiCplusplus className="text-blue-600" />,
+      top: "15%",
+      left: "20%",
+    },
+    {
+      id: 10,
+      icon: <SiCplusplus className="text-blue-600" />,
+      top: "5%",
+      left: "70%",
+    },
   ];
 
   return (

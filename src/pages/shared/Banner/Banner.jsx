@@ -1,6 +1,6 @@
 import React from "react";
 import { Typewriter } from "react-simple-typewriter";
-import banner from "../../../assets/banner.jpg"; // Replace with your image path
+import banner2 from "../../../assets/banner2.jpg"; // Replace with your image path
 
 import FloatingIcons from "./FloatingIcons";
 
@@ -11,7 +11,7 @@ const Banner = () => {
     <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden">
       {/* Background Image */}
       <img
-        src={banner}
+        src={banner2}
         alt="Banner"
         className="absolute inset-0  w-full h-full object-cover z-0"
       />
