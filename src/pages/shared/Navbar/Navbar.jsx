@@ -51,9 +51,8 @@ const Navbar = () => {
             {navItems}
           </ul>
         </div>
-        <a className="  ">
-          <Logo />
-        </a>
+
+        <Logo />
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 space-x-6">{navItems}</ul>
@@ -62,8 +61,8 @@ const Navbar = () => {
         <IoNotificationsOutline className="text-xl lg:text-5xl mr-1 lg:mr-3 hover:text-white" />
         <Link to={"/auth/registration"}>
           {" "}
-          <button class="lato font-semibold relative inline-flex items-center justify-center  overflow-hidden  text-[10px] lg:text-xl  text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white ">
-            <span class="relative px-2 lg:px-5 py-1 lg:py-2.5 transition-all ease-in duration-75 bg-Accent  rounded-md group-hover:bg-transparent ">
+          <button className="lato font-semibold relative inline-flex items-center justify-center  overflow-hidden  text-[10px] lg:text-xl  text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white ">
+            <span className="relative px-2 lg:px-5 py-1 lg:py-2.5 transition-all ease-in duration-75 bg-Accent  rounded-md group-hover:bg-transparent ">
               Join US
             </span>
           </button>

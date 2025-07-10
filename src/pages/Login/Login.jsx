@@ -13,7 +13,7 @@ const Login = () => {
           </div>
           <div className="mt-12 flex flex-col items-center">
             <h1 className="lato text-2xl xl:text-3xl font-extrabold">
-              logIn now
+              LogIn now
             </h1>
             <div className="w-full flex-1 mt-8">
               <div className="flex flex-col items-center">

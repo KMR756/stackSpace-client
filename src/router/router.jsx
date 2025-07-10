@@ -4,11 +4,15 @@ import Home from "../pages/Home/Home";
 import AuthLayout from "../layouts/AuthLayout";
 import Registration from "../pages/Registration/Registration";
 import Login from "../pages/Login/Login";
+import Error from "../pages/shared/Error/Error";
+import Loading from "../pages/shared/Loading/Loading";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
+    errorElement: <Error />,
+
     children: [
       {
         index: true,
@@ -19,6 +23,7 @@ export const router = createBrowserRouter([
   {
     path: "/auth",
     Component: AuthLayout,
+    errorElement: <Error />,
     children: [
       {
         path: "registration",
@@ -29,5 +34,9 @@ export const router = createBrowserRouter([
         Component: Login,
       },
     ],
+  },
+  {
+    path: "loading",
+    Component: Loading,
   },
 ]);
