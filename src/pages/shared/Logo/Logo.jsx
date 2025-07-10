@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../../../assets/logo.png";
 const Logo = () => {
   return (
-    <div className="flex gap-1 lg:gap-4">
+    <div className="flex gap-1 ">
       <div className="w-[20%] h-[30%]">
         <img src={logo} alt="" />
       </div>
