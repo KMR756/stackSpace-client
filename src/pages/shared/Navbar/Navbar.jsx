@@ -1,6 +1,6 @@
 import React from "react";
 
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { IoNotificationsOutline } from "react-icons/io5";
 import Logo from "../Logo/Logo";
 
@@ -60,11 +60,14 @@ const Navbar = () => {
       </div>
       <div className="navbar-end ">
         <IoNotificationsOutline className="text-xl lg:text-5xl mr-1 lg:mr-3 hover:text-white" />
-        <button class="lato font-semibold relative inline-flex items-center justify-center  overflow-hidden  text-[10px] lg:text-xl  text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white ">
-          <span class="relative px-2 lg:px-5 py-1 lg:py-2.5 transition-all ease-in duration-75 bg-Accent  rounded-md group-hover:bg-transparent ">
-            Join US
-          </span>
-        </button>
+        <Link to={"/auth/registration"}>
+          {" "}
+          <button class="lato font-semibold relative inline-flex items-center justify-center  overflow-hidden  text-[10px] lg:text-xl  text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white ">
+            <span class="relative px-2 lg:px-5 py-1 lg:py-2.5 transition-all ease-in duration-75 bg-Accent  rounded-md group-hover:bg-transparent ">
+              Join US
+            </span>
+          </button>
+        </Link>
       </div>
     </div>
   );
