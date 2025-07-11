@@ -2,6 +2,7 @@ import Logo from "../shared/Logo/Logo";
 import userPicDemo from "../../assets/userPic.png";
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
 
 const Registration = () => {
   const {
@@ -9,8 +10,17 @@ const Registration = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { createUser } = useAuth();
   const onSubmit = (data) => {
     console.log(data);
+    console.log(createUser);
+    createUser(data.email, data.password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
