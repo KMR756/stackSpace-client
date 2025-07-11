@@ -7,7 +7,7 @@ const Logo = () => {
       <Link to={"/"}>
         {" "}
         <div className="flex gap-1 ">
-          <div className="w-[50%] lg:w-[20%] h-[50%] lg:h-[30%]">
+          <div className="w-[20%] h-[30%]">
             <img src={logo} alt="" />
           </div>
           <div className="flex flex-col justify-end lg:mt-4">

@@ -1,8 +1,18 @@
-import React from "react";
 import Logo from "../shared/Logo/Logo";
+import userPicDemo from "../../assets/userPic.png";
 import { Link } from "react-router";
+import { useForm } from "react-hook-form";
 
 const Registration = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
@@ -47,36 +57,76 @@ const Registration = () => {
                 </div>
               </div>
 
-              <div className="mx-auto max-w-xs">
-                <input
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                  type="email"
-                  placeholder="Email"
-                />
-                <input
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                  type="password"
-                  placeholder="Password"
-                />
-                <button className="mt-5 tracking-wide font-semibold bg-[#8f5989]  text-gray-100 w-full py-4 rounded-lg hover:bg-navFooter transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                  <svg
-                    className="w-6 h-6 -ml-2"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="mx-auto max-w-xs">
+                  <input
+                    className="w-full  px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    type="text"
+                    placeholder="Name"
+                    {...register("name", { required: true })}
+                  />
+                  {errors.name && (
+                    <span className="text-red-500 text-sm mt-1 block">
+                      Name is required
+                    </span>
+                  )}
+                  <input
+                    className="w-full px-8 py-4 mt-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    type="email"
+                    placeholder="Email"
+                    {...register("email", { required: true })}
+                  />
+                  {errors.email && (
+                    <span className="text-red-500 text-sm mt-1 block">
+                      Email is required
+                    </span>
+                  )}
+                  <input
+                    className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                    type="password"
+                    placeholder="Password"
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 6,
+                        message: "Password must be at least 6 characters",
+                      },
+                      pattern: {
+                        value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+                        message: "Password must include letters and numbers",
+                      },
+                    })}
+                  />
+
+                  {errors.password && (
+                    <span className="text-red-500 text-sm mt-1 block">
+                      {errors.password.message}
+                    </span>
+                  )}
+
+                  <button
+                    type="submit"
+                    className="mt-5 tracking-wide font-semibold bg-[#8f5989] text-gray-100 w-full py-4 rounded-lg hover:bg-navFooter transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                   >
-                    <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                    <circle cx="8.5" cy="7" r="4" />
-                    <path d="M20 8v6M23 11h-6" />
-                  </svg>
-                  <span className="lato ml-3">Registration</span>
-                </button>
-                <p className="lato mt-6 text-xs text-gray-600 text-center">
-                  Already have an account? <Link to={"/auth/login"}>LogIn</Link>
-                </p>
-              </div>
+                    <svg
+                      className="w-6 h-6 -ml-2"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                      <circle cx="8.5" cy="7" r="4" />
+                      <path d="M20 8v6M23 11h-6" />
+                    </svg>
+                    <span className="lato ml-3">Registration</span>
+                  </button>
+                  <p className="lato mt-6 text-xs text-gray-600 text-center">
+                    Already have an account? <Link to="/auth/login">LogIn</Link>
+                  </p>
+                </div>
+              </form>
             </div>
           </div>
         </div>
