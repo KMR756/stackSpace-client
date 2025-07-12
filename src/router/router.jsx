@@ -6,7 +6,10 @@ import Registration from "../pages/Registration/Registration";
 import Login from "../pages/Login/Login";
 import Error from "../pages/shared/Error/Error";
 import Loading from "../pages/shared/Loading/Loading";
-import Membership from "../pages/Membership/Membership";
+
+import UserDashboard from "../pages/UserDashboard/UserDashboard";
+import PrivateRoute from "../routes/Privateroute";
+import MemberShip from "../pages/Membership/Membership";
 
 export const router = createBrowserRouter([
   {
@@ -21,7 +24,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "membership",
-        Component: Membership,
+        element: (
+          <PrivateRoute>
+            <MemberShip></MemberShip>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "user-dashboard",
+        Component: UserDashboard,
       },
     ],
   },

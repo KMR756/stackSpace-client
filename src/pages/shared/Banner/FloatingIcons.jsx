@@ -47,7 +47,7 @@ const FloatingIcons = () => {
       left: "20%",
     },
     {
-      id: 6,
+      id: 7,
       icon: <FaJsSquare className="text-yellow-400" />,
       top: "60%",
       left: "3%",
@@ -55,13 +55,13 @@ const FloatingIcons = () => {
 
     // C
     {
-      id: 7,
+      id: 8,
       icon: <FaCuttlefish className="text-gray-300" />,
       top: "75%",
       left: "76%",
     },
     {
-      id: 8,
+      id: 9,
       icon: <FaCuttlefish className="text-gray-300" />,
       top: "50%",
       left: "10%",
@@ -69,19 +69,19 @@ const FloatingIcons = () => {
 
     // C++
     {
-      id: 9,
+      id: 10,
       icon: <SiCplusplus className="text-blue-600" />,
       top: "35%",
       left: "80%",
     },
     {
-      id: 10,
+      id: 11,
       icon: <SiCplusplus className="text-blue-600" />,
       top: "15%",
       left: "20%",
     },
     {
-      id: 10,
+      id: 12,
       icon: <SiCplusplus className="text-blue-600" />,
       top: "5%",
       left: "70%",
