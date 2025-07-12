@@ -1,11 +1,15 @@
 import Logo from "../shared/Logo/Logo";
-import userPicDemo from "../../assets/userPic.png";
+// import userPicDemo from "../../assets/userPic.png";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import axios from "axios";
+import { useState } from "react";
 
 const Registration = () => {
+  const { createUser, updateUserProfile } = useAuth();
+  const [profilePic, setProfilePic] = useState("");
   const location = useLocation();
   const Navigate = useNavigate();
   const from = location.state?.from || "/";
@@ -14,20 +18,45 @@ const Registration = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { createUser } = useAuth();
+
   const onSubmit = (data) => {
     console.log(data);
     console.log(createUser);
     createUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
+        // update profile in database
+
+        // update profile in firebase
+        const userProfile = {
+          displayName: data.name,
+          photoURL: profilePic,
+        };
+        updateUserProfile(userProfile)
+          .then(() => {
+            console.log("profile name pic updated");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
         Navigate(from);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
+  const handleImageUpload = async (e) => {
+    const image = e.target.files[0];
+    console.log(image);
+    const formData = new FormData();
+    formData.append("image", image);
+    const imgUploadURL = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_image_upload_key
+    }`;
+    const res = await axios.post(imgUploadURL, formData);
+    setProfilePic(res.data.data.url);
+  };
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
@@ -51,7 +80,13 @@ const Registration = () => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mx-auto max-w-xs">
                   <input
+                    onChange={handleImageUpload}
                     className="w-full  px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    type="file"
+                    placeholder="profile picture"
+                  />
+                  <input
+                    className="w-full mt-5 px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     type="text"
                     placeholder="Name"
                     {...register("name", { required: true })}
