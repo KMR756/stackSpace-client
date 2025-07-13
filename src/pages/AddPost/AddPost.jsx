@@ -1,24 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import axios from "axios";
+// import React, { useState, useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
+// import axios from "axios";
 import { useNavigate } from "react-router";
 import Select from "react-select";
 import Loading from "../shared/Loading/Loading";
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const AddPost = () => {
-  const [postCount, setPostCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  //   const [postCount, setPostCount] = useState(0);
+  //   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const { user } = useAuth();
-  //   console.log(user);
-
+  const axiosSecure = useAxiosSecure();
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      authorName: user?.displayName || "",
+      authorEmail: user?.email || "",
+      authorImage: user?.photoURL || "",
+      createdAt: new Date().toISOString(),
+    },
+  });
 
   // Technology-focused tag options
   const techTagOptions = [
@@ -37,76 +44,96 @@ const AddPost = () => {
     { value: "database", label: "Database" },
   ];
 
-  useEffect(() => {
-    const fetchPostCount = async () => {
-      try {
-        const response = await axios.get("/api/posts/count");
-        setPostCount(response.data.count);
-      } catch (error) {
-        console.error("Error fetching post count:", error);
-      } finally {
-        setIsLoading(false);
-      }
+  //   useEffect(() => {
+  //     const fetchPostCount = async () => {
+  //       try {
+  //         const response = await axios.get("/api/posts/count");
+  //         setPostCount(response.data.count);
+  //       } catch (error) {
+  //         console.error("Error fetching post count:", error);
+  //       } finally {
+  //         setIsLoading(false);
+  //       }
+  //     };
+
+  //     fetchPostCount();
+  //   }, []);
+
+  const onSubmit = (data) => {
+    const postData = {
+      ...data,
+      upVote: 0,
+      downVote: 0,
+      createdAt: new Date().toISOString(), // Add current timestamp
+      author: {
+        name: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        uid: user.uid, // Add user ID if available
+      },
     };
 
-    fetchPostCount();
-  }, []);
+    axiosSecure.post("/posts", postData).then((res) => {
+      //   console.log(res.data._id);
+      if (res.data._id) {
+        alert("post created successfully");
+        navigate("/dashboard/my-post");
+      }
+    });
 
-  const onSubmit = async (data) => {
-    try {
-      const postData = {
-        ...data,
-        upVote: 0, // Default to 0
-        downVote: 0, // Default to 0
-      };
-
-      await axios.post("/api/posts", postData);
-      alert("Tech post created successfully!");
-      setPostCount((prev) => prev + 1);
-    } catch (error) {
-      console.error("Error creating post:", error);
-      alert("Failed to create tech post");
-    }
+    // console.log(data.insertedId);
   };
 
-  const handleBecomeMember = () => {
-    navigate("/membership");
-  };
+  //   const handleBecomeMember = () => {
+  //     navigate("/membership");
+  //   };
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  //   if (isLoading) {
+  //     return <Loading />;
+  //   }
 
-  if (postCount >= 5) {
-    return (
-      <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-4">Tech Post Limit Reached</h2>
-        <p className="mb-6">
-          You've reached the maximum limit of 5 tech posts for free users.
-          Upgrade to our Tech Pro membership to continue sharing your knowledge!
-        </p>
-        <button
-          onClick={handleBecomeMember}
-          className="w-full bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded transition-colors"
-        >
-          Become a Tech Pro Member
-        </button>
-      </div>
-    );
-  }
+  //   if (postCount >= 5) {
+  //     return (
+  //       <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+  //         <h2 className="text-2xl font-bold mb-4">Tech Post Limit Reached</h2>
+  //         <p className="mb-6">
+  //           You've reached the maximum limit of 5 tech posts for free users.
+  //           Upgrade to our Tech Pro membership to continue sharing your knowledge!
+  //         </p>
+  //         <button
+  //           onClick={handleBecomeMember}
+  //           className="w-full bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded transition-colors"
+  //         >
+  //           Become a Tech Pro Member
+  //         </button>
+  //       </div>
+  //     );
+  //   }
 
   return (
     <div className="w-full lg:w-2/3 mx-auto my-10 p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-5xl text-center text-navFooter font-bold mb-6 ">
+      <h2 className="text-5xl text-center text-navFooter font-bold mb-6">
         Add Post
       </h2>
+
+      {/* User Info Section */}
       <div className="flex justify-center items-center flex-col border-transparent p-10 rounded-3xl bg-amber-100 md:mx-20 lg:mx-30 xl:mx-60">
         <div>
-          <img className="w-20 h-20 rounded-full" src={user.photoURL} alt="" />
+          <img
+            className="w-20 h-20 rounded-full"
+            src={user.photoURL}
+            alt={user.displayName}
+          />
         </div>
         <h1 className="lato font-bold mt-3 text-xl">{user.displayName}</h1>
-        <h1 className="lato mt-2 ">{user.email}</h1>
+        <h1 className="lato mt-2">{user.email}</h1>
+
+        {/* Hidden fields for user data */}
+        <input type="hidden" {...register("authorName")} />
+        <input type="hidden" {...register("authorEmail")} />
+        <input type="hidden" {...register("authorImage")} />
       </div>
+
       <form
         className="border-transparent rounded-3xl bg-amber-50 p-6 mt-10"
         onSubmit={handleSubmit(onSubmit)}
@@ -137,7 +164,7 @@ const AddPost = () => {
 
         <div className="mb-4">
           <label
-            className="lato block text-gray-700 text-xl  font-bold mb-2"
+            className="lato block text-gray-700 text-xl font-bold mb-2"
             htmlFor="postDescription"
           >
             Description :
@@ -159,35 +186,43 @@ const AddPost = () => {
         </div>
 
         <div className="mb-6">
-          <label className="lato block text-gray-700 text-xl  font-bold mb-2">
+          <label className="block text-gray-700 text-xl font-bold mb-2">
             Tech Category
           </label>
-          <Select
-            options={techTagOptions}
-            className="basic-multi-select"
-            classNamePrefix="select"
+          <Controller
             name="tag"
-            {...register("tag", {
-              required: "Please select at least one tech category",
-            })}
+            control={control}
+            rules={{ required: "Please select at least one tech category" }}
+            render={({ field }) => (
+              <Select
+                {...field}
+                options={techTagOptions}
+                className="basic-multi-select"
+                classNamePrefix="select"
+                onChange={(selected) => field.onChange(selected)}
+                onBlur={field.onBlur}
+                value={techTagOptions.find(
+                  (option) => option.value === field.value?.value
+                )}
+              />
+            )}
           />
           {errors.tag && (
-            <p className="text-red-500 text-xs italic">
-              Please select a tech category
-            </p>
+            <p className="text-red-500 text-xs italic">{errors.tag.message}</p>
           )}
         </div>
 
-        {/* Hidden vote fields with default values */}
+        {/* Hidden fields */}
         <input type="hidden" {...register("upVote")} value={0} />
         <input type="hidden" {...register("downVote")} value={0} />
+        <input type="hidden" {...register("createdAt")} />
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-center mt-8">
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors"
+            className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-full focus:outline-none focus:shadow-outline transition-colors text-lg"
           >
-            Post
+            Publish Post
           </button>
         </div>
       </form>
