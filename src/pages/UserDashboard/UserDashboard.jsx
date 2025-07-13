@@ -2,6 +2,7 @@ import React from "react";
 import myProfile from "../../assets/myProfile.svg";
 import addPost from "../../assets/addPost.svg";
 import myPost from "../../assets/myPost.svg";
+import { Link } from "react-router";
 const UserDashboard = () => {
   return (
     <div>
@@ -15,42 +16,48 @@ const UserDashboard = () => {
 
           {/* <!-- Cards --> */}
           <div class="flex flex-wrap gap-8 justify-center items-center">
-            <div class="group w-[18rem] sm:w-[20rem] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-              <img
-                class="w-full h-[14rem] object-cover"
-                src={myProfile}
-                alt="Sushi"
-              />
-              <div class="p-5">
-                <h2 class="lato text-2xl text-center font-bold  mb-1 group-hover:text-rose-600 ">
-                  My Profile
-                </h2>
+            <Link to={"/dashboard/my-profile"}>
+              <div class="group w-[18rem] sm:w-[20rem] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                <img
+                  class="w-full h-[14rem] object-cover"
+                  src={myProfile}
+                  alt="Sushi"
+                />
+                <div class="p-5">
+                  <h2 class="lato text-2xl text-center font-bold  mb-1 group-hover:text-rose-600 ">
+                    My Profile
+                  </h2>
+                </div>
               </div>
-            </div>
-            <div class="group w-[18rem] sm:w-[20rem] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-              <img
-                class="w-full h-[14rem] object-cover"
-                src={addPost}
-                alt="Sushi"
-              />
-              <div class="p-5">
-                <h2 class="lato text-2xl text-center font-bold  mb-1 group-hover:text-rose-600 ">
-                  Add Post
-                </h2>
+            </Link>
+            <Link to={"/dashboard/add-post"}>
+              <div class="group w-[18rem] sm:w-[20rem] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                <img
+                  class="w-full h-[14rem] object-cover"
+                  src={addPost}
+                  alt="Sushi"
+                />
+                <div class="p-5">
+                  <h2 class="lato text-2xl text-center font-bold  mb-1 group-hover:text-rose-600 ">
+                    Add Post
+                  </h2>
+                </div>
               </div>
-            </div>
-            <div class="group w-[18rem] sm:w-[20rem] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-              <img
-                class="w-full h-[14rem] object-cover"
-                src={myPost}
-                alt="Sushi"
-              />
-              <div class="p-5">
-                <h2 class="lato text-2xl text-center font-bold  mb-1 group-hover:text-rose-600 ">
-                  My Posts
-                </h2>
+            </Link>
+            <Link to={"/dashboard/my-post"}>
+              <div class="group w-[18rem] sm:w-[20rem] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                <img
+                  class="w-full h-[14rem] object-cover"
+                  src={myPost}
+                  alt="Sushi"
+                />
+                <div class="p-5">
+                  <h2 class="lato text-2xl text-center font-bold  mb-1 group-hover:text-rose-600 ">
+                    My Posts
+                  </h2>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

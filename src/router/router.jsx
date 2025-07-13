@@ -7,9 +7,13 @@ import Login from "../pages/Login/Login";
 import Error from "../pages/shared/Error/Error";
 import Loading from "../pages/shared/Loading/Loading";
 
-import UserDashboard from "../pages/UserDashboard/UserDashboard";
 import PrivateRoute from "../routes/Privateroute";
 import MemberShip from "../pages/Membership/Membership";
+import UserDashboard from "../pages/UserDashboard/UserDashboard";
+import DashboardLayout from "../layouts/DashboardLayout";
+import AddPost from "../pages/AddPost/AddPost";
+import MyProfile from "../pages/MyProfile/MyProfile";
+import MyPost from "../pages/MyPost/MyPost";
 
 export const router = createBrowserRouter([
   {
@@ -30,9 +34,43 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+    ],
+  },
+  {
+    path: "/dashboard",
+    Component: DashboardLayout,
+    children: [
       {
         path: "user-dashboard",
-        Component: UserDashboard,
+        element: (
+          <PrivateRoute>
+            <UserDashboard></UserDashboard>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-profile",
+        element: (
+          <PrivateRoute>
+            <MyProfile></MyProfile>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "add-post",
+        element: (
+          <PrivateRoute>
+            <AddPost></AddPost>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-post",
+        element: (
+          <PrivateRoute>
+            <MyPost></MyPost>
+          </PrivateRoute>
+        ),
       },
     ],
   },

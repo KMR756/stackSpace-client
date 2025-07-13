@@ -34,7 +34,7 @@ const DropDown = () => {
           </p>
 
           <li>
-            <Link to={"/user-dashboard"}>Dashboard</Link>
+            <Link to={"/dashboard/user-dashboard"}>Dashboard</Link>
           </li>
           <li>
             <button onClick={handleLogout}>Logout</button>
