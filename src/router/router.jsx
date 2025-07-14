@@ -14,6 +14,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import AddPost from "../pages/AddPost/AddPost";
 import MyProfile from "../pages/MyProfile/MyProfile";
 import MyPost from "../pages/MyPost/MyPost";
+import axios from "axios";
 
 export const router = createBrowserRouter([
   {
@@ -51,13 +52,19 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "my-profile",
+        path: "my-profile/:uid",
+        loader: ({ params }) =>
+          axios(`http://localhost:3000/posts/user/${params.uid}`).then(
+            (res) => res.data
+          ),
+        hydrateFallbackElement: <Loading />,
         element: (
           <PrivateRoute>
-            <MyProfile></MyProfile>
+            <MyProfile />
           </PrivateRoute>
         ),
       },
+
       {
         path: "add-post",
         element: (

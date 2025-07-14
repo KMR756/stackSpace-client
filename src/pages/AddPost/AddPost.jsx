@@ -120,7 +120,7 @@ const AddPost = () => {
       <div className="flex justify-center items-center flex-col border-transparent p-10 rounded-3xl bg-amber-100 md:mx-20 lg:mx-30 xl:mx-60">
         <div>
           <img
-            className="w-20 h-20 rounded-full"
+            className="w-20 h-20 object-cover rounded-full"
             src={user.photoURL}
             alt={user.displayName}
           />
