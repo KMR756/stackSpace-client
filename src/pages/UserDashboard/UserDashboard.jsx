@@ -49,7 +49,7 @@ const UserDashboard = () => {
                 </div>
               </div>
             </Link>
-            <Link to={"/dashboard/my-post"}>
+            <Link to={`/dashboard/my-posts/${user.uid}`}>
               <div class="group w-[18rem] sm:w-[20rem] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                 <img
                   class="w-full h-[14rem] object-cover"

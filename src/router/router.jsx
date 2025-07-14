@@ -74,7 +74,12 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "my-post",
+        path: "my-posts/:uid",
+        loader: ({ params }) =>
+          axios(`http://localhost:3000/posts/user/${params.uid}`).then(
+            (res) => res.data
+          ),
+        hydrateFallbackElement: <Loading />,
         element: (
           <PrivateRoute>
             <MyPost></MyPost>
