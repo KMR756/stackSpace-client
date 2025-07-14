@@ -18,9 +18,15 @@ const MyPost = () => {
             </th>
             <th
               scope="col"
-              class="px-1 lg:px-6 text-center text-[10px] lg:text-xl  font-bold text-black uppercase tracking-wider"
+              class="px-1 lg:px-6 text-center text-[10px] lg:text-[18px]  font-bold text-black uppercase tracking-wider"
             >
-              Votes
+              Up Vote
+            </th>
+            <th
+              scope="col"
+              class="px-1 lg:px-6 text-center text-[10px] lg:text-[18px]  font-bold text-black uppercase tracking-wider"
+            >
+              Down Vote
             </th>
 
             <th
@@ -43,6 +49,11 @@ const MyPost = () => {
               <td class="px-1 lg:px-6 text-center whitespace-nowrap">
                 <span class="px-2  inline-flex text-[6px] lg:text-xl leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                   {post.upVote}
+                </span>
+              </td>
+              <td class="px-1 lg:px-6 text-center whitespace-nowrap">
+                <span class="px-2  inline-flex text-[6px] lg:text-xl leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                  {post.downVote}
                 </span>
               </td>
 

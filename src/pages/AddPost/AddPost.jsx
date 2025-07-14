@@ -77,7 +77,7 @@ const AddPost = () => {
       //   console.log(res.data._id);
       if (res.data._id) {
         alert("post created successfully");
-        navigate("/dashboard/my-post");
+        navigate(`/dashboard/my-posts/${user.uid}`);
       }
     });
 
