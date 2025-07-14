@@ -4,10 +4,9 @@ import { formatDistanceToNow } from "date-fns";
 
 const AllPost = ({ post }) => {
   // Calculate vote difference
-  const voteDifference = post.upVote - post.downVote;
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6 transition-all hover:shadow-lg">
+    <div className="bg-white  my-7 w-4/5 mx-auto rounded-lg shadow-md overflow-hidden mb-6 transition-all hover:shadow-lg">
       {/* Post Header with Author Info */}
       <div className="p-4 border-b border-gray-100">
         <div className="flex items-center space-x-3">
@@ -36,7 +35,6 @@ const AllPost = ({ post }) => {
             {post.tag?.label}
           </span>
         </div>
-        <p className="text-gray-700 mb-4">{post.postDescription}</p>
       </div>
 
       {/* Post Footer with Voting and Comments */}
@@ -49,17 +47,6 @@ const AllPost = ({ post }) => {
           </button>
 
           {/* Vote Difference Display */}
-          <div
-            className={`font-medium ${
-              voteDifference > 0
-                ? "text-green-600"
-                : voteDifference < 0
-                ? "text-red-600"
-                : "text-gray-500"
-            }`}
-          >
-            {voteDifference} points
-          </div>
 
           {/* Downvote Button */}
           <button className="flex items-center space-x-1 text-gray-500 hover:text-red-600">
