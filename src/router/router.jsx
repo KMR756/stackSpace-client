@@ -25,6 +25,8 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+        loader: () => fetch("http://localhost:3000/posts"),
+        hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "membership",
