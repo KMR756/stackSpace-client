@@ -2,6 +2,8 @@ import { useLoaderData } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import { FaArrowUp, FaArrowDown, FaComment, FaClock } from "react-icons/fa";
 import { formatDistanceToNow } from "date-fns";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const MyProfile = () => {
   const posts = useLoaderData();
@@ -10,6 +12,22 @@ const MyProfile = () => {
   const recentPosts = [...posts]
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 3);
+
+  const [userData, setUserData] = useState(null); // ✅ Declare state
+
+  useEffect(() => {
+    if (user?.email) {
+      axios
+        .get(`http://localhost:3000/users/${user.email}`)
+        .then((res) => {
+          setUserData(res.data); // ✅ Save to state
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
+    }
+  }, [user?.email]);
+  console.log(userData);
 
   return (
     <div className="w-full lg:w-2/3 mx-auto my-10 p-6 bg-white rounded-lg shadow-md">
@@ -27,7 +45,7 @@ const MyProfile = () => {
         <h1 className="lato font-bold mt-3 text-xl">{user.displayName}</h1>
         <h1 className="lato mt-2">{user.email}</h1>
         <p className="lato border-transparent bg-blue-400 text-white font-semibold px-2 py-1 rounded-2xl mt-2">
-          Bronze{" "}
+          {userData?.membership ? "Gold" : "Bronze"}
         </p>
       </div>
 

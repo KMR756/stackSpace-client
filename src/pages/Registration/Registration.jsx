@@ -20,32 +20,42 @@ const Registration = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-    console.log(createUser);
     createUser(data.email, data.password)
       .then((result) => {
-        console.log(result.user);
-        // update profile in database
+        const user = result.user;
 
-        // update profile in firebase
         const userProfile = {
           displayName: data.name,
           photoURL: profilePic,
         };
+
         updateUserProfile(userProfile)
           .then(() => {
-            console.log("profile name pic updated");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+            console.log("Firebase profile updated");
 
-        Navigate(from);
+            const saveUser = {
+              name: data.name,
+              email: data.email,
+              photoURL: profilePic,
+              createdAt: new Date(),
+              membership: false, // <-- Add membership field
+            };
+
+            axios
+              .post("http://localhost:3000/users", saveUser)
+              .then(() => {
+                console.log("User saved to DB");
+                Navigate(from);
+              })
+              .catch((err) => console.error("Failed to save user:", err));
+          })
+          .catch((err) => console.log("Profile update error:", err));
       })
       .catch((err) => {
-        console.log(err);
+        console.log("Registration error:", err);
       });
   };
+
   const handleImageUpload = async (e) => {
     const image = e.target.files[0];
     console.log(image);
