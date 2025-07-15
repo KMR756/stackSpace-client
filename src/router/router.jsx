@@ -15,6 +15,7 @@ import AddPost from "../pages/AddPost/AddPost";
 import MyProfile from "../pages/MyProfile/MyProfile";
 import MyPost from "../pages/MyPost/MyPost";
 import axios from "axios";
+import SinglePost from "../pages/SinglePost/SinglePost";
 
 export const router = createBrowserRouter([
   {
@@ -83,6 +84,19 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyPost></MyPost>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "post/:id",
+        loader: ({ params }) =>
+          axios(`http://localhost:3000/posts/${params.id}`).then(
+            (res) => res.data
+          ),
+        hydrateFallbackElement: <Loading />,
+        element: (
+          <PrivateRoute>
+            <SinglePost />
           </PrivateRoute>
         ),
       },

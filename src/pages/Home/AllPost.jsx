@@ -55,11 +55,11 @@ const AllPost = ({ post }) => {
 
     try {
       await axios.post(`http://localhost:3000/posts/${post._id}/comment`, {
-        email: user.email,
+        name: user.displayName,
         commentText: newComment,
       });
       const comment = {
-        email: user.displayName,
+        name: user.displayName,
         commentText: newComment,
         createdAt: new Date().toISOString(),
       };
@@ -156,7 +156,7 @@ const AllPost = ({ post }) => {
         <div className="space-y-3">
           {comments.map((comment, idx) => (
             <div key={idx} className="bg-gray-100 p-3 rounded">
-              <p className="text-sm font-medium">{comment.email}</p>
+              <p className="text-sm font-medium">{comment.name}</p>
               <p className="text-gray-700">{comment.commentText}</p>
               <p className="text-xs text-gray-500 mt-1">
                 {formatDistanceToNow(new Date(comment.createdAt), {
