@@ -3,9 +3,11 @@ import { FaArrowUp, FaArrowDown, FaComment, FaClock } from "react-icons/fa";
 import { formatDistanceToNow } from "date-fns";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router";
 
 const AllPost = ({ post }) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [upVote, setUpVote] = useState(post.upVote || 0);
   const [downVote, setDownVote] = useState(post.downVote || 0);
   const [comments, setComments] = useState(post.comments || []);
@@ -51,7 +53,9 @@ const AllPost = ({ post }) => {
 
   const handleComment = async (e) => {
     e.preventDefault();
-    if (!newComment.trim() || !user?.email) return;
+    if (!newComment.trim() || !user?.email) {
+      return navigate("auth/login");
+    }
 
     try {
       await axios.post(`http://localhost:3000/posts/${post._id}/comment`, {
