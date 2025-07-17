@@ -1,23 +1,44 @@
 import React, { useState } from "react";
 import { Link, useLoaderData } from "react-router";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const MyPost = () => {
   const loadedPosts = useLoaderData();
   const [posts, setPosts] = useState(loadedPosts);
 
   const handleDelete = async (id) => {
-    const confirm = window.confirm(
-      "Are you sure you want to delete this post?"
-    );
-    if (!confirm) return;
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to delete this post?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    });
 
-    try {
-      await axios.delete(`http://localhost:3000/posts/${id}`);
-      setPosts((prev) => prev.filter((post) => post._id !== id));
-    } catch (err) {
-      console.error("Delete failed:", err);
-      alert("Failed to delete post.");
+    if (result.isConfirmed) {
+      try {
+        await axios.delete(`http://localhost:3000/posts/${id}`);
+        setPosts((prev) => prev.filter((post) => post._id !== id));
+
+        Swal.fire({
+          title: "Deleted!",
+          text: "The post has been deleted.",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      } catch (err) {
+        console.error("Delete failed:", err);
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to delete post.",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
     }
   };
 

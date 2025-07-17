@@ -24,11 +24,11 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to={"/membership"}
+          to={`/dashboard/membership/${user?.email}`}
           className={({ isActive }) =>
             isActive
-              ? "lato btn btn-neutral  text-sm lg:text-xl  text-text"
-              : "lato btn btn-neutral btn-outline text-sm lg:text-xl  text-text"
+              ? "lato btn btn-neutral text-sm lg:text-xl text-text"
+              : "lato btn btn-neutral btn-outline text-sm lg:text-xl text-text"
           }
         >
           Membership

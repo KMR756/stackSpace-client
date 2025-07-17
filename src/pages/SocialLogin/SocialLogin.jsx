@@ -1,27 +1,49 @@
 import React from "react";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const SocialLogin = () => {
   const location = useLocation();
-  const Navigate = useNavigate();
-  const from = location.state?.from || "/";
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const { singInWithGoogle } = useAuth();
-  const handleGoogleSingIn = () => {
-    singInWithGoogle()
-      .then((result) => {
-        console.log(result);
-        Navigate(from);
-      })
-      .catch((err) => {
-        console.log(err);
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await singInWithGoogle();
+      toast.success("login with google!", {
+        duration: 3000,
+        style: {
+          background: "#22c55e",
+          color: "#fff",
+        },
       });
+      navigate(from);
+      const loggedUser = result.user;
+
+      const saveUser = {
+        name: loggedUser.displayName,
+        email: loggedUser.email,
+        photoURL: loggedUser.photoURL,
+        createdAt: new Date(),
+        membership: false,
+      };
+
+      await axios.post("http://localhost:3000/users", saveUser);
+      console.log("Google user saved to DB");
+    } catch (err) {
+      // You might want to show an error message to the user here
+    }
   };
+
   return (
     <div className="flex flex-col items-center">
       <button
-        onClick={handleGoogleSingIn}
+        onClick={handleGoogleSignIn}
         className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
+        type="button"
       >
         <div className="bg-white p-2 rounded-full">
           <svg className="w-4" viewBox="0 0 533.5 544.3">
@@ -43,7 +65,7 @@ const SocialLogin = () => {
             />
           </svg>
         </div>
-        <span className="ml-4 lato text-2xl">Google</span>
+        <span className="ml-4 lato text-2xl">Sign in with Google</span>
       </button>
     </div>
   );

@@ -30,14 +30,6 @@ export const router = createBrowserRouter([
         loader: () => fetch("http://localhost:3000/posts"),
         hydrateFallbackElement: <Loading></Loading>,
       },
-      {
-        path: "membership",
-        element: (
-          <PrivateRoute>
-            <MemberShip></MemberShip>
-          </PrivateRoute>
-        ),
-      },
     ],
   },
   {
@@ -97,6 +89,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <SinglePost />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "membership/:user_email",
+        element: (
+          <PrivateRoute>
+            <MemberShip></MemberShip>
           </PrivateRoute>
         ),
       },

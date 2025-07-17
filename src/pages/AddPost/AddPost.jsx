@@ -6,6 +6,7 @@ import Loading from "../shared/Loading/Loading";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const AddPost = () => {
   const [userPostsCount, setUserPostsCount] = useState(0);
@@ -15,6 +16,10 @@ const AddPost = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
+  const handlePayment = (email) => {
+    navigate(`/dashboard/membership/${email}`);
+    console.log(user);
+  };
   const {
     register,
     handleSubmit,
@@ -77,7 +82,7 @@ const AddPost = () => {
           setUserData(res.data); // ✅ Save to state
         })
         .catch((error) => {
-          console.error("Error fetching user data:", error);
+          // console.error("Error fetching user data:", error);
         });
     }
   }, [user?.email]);
@@ -102,7 +107,13 @@ const AddPost = () => {
 
     axiosSecure.post("/posts", postData).then((res) => {
       if (res.data._id) {
-        alert("Post created successfully!");
+        toast.success("post created successfully!", {
+          duration: 3000,
+          style: {
+            background: "#22c55e",
+            color: "#fff",
+          },
+        });
         navigate(`/dashboard/my-posts/${user.uid}`);
       }
     });
@@ -120,7 +131,7 @@ const AddPost = () => {
           Upgrade to membership to publish unlimited posts.
         </p>
         <button
-          onClick={() => navigate("/membership")}
+          onClick={() => handlePayment(user.email)}
           className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full text-lg"
         >
           Become a Member

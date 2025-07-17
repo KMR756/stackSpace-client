@@ -1,11 +1,12 @@
-import { Link } from "react-router"; // Fix: use react-router-dom, not react-router
+import { Link, useNavigate } from "react-router"; // Fix: use react-router-dom, not react-router
 import useAuth from "../../../hooks/useAuth";
 import axios from "axios"; // Plain axios
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const DropDown = () => {
   const { user, logOut } = useAuth();
-
+  const navigate = useNavigate();
   const [userData, setUserData] = useState(null); // ✅ Declare state
 
   useEffect(() => {
@@ -20,16 +21,36 @@ const DropDown = () => {
         });
     }
   }, [user?.email]);
-  console.log(userData);
+  // console.log(userData);
 
   const handleLogout = () => {
-    logOut()
-      .then(() => {
-        // Optional: show a toast or redirect
-      })
-      .catch((error) => {
-        console.error("Logout failed", error);
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to log out?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, log me out",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logOut()
+          .then(() => {
+            Swal.fire({
+              title: "Logged out",
+              text: "You have been logged out successfully.",
+              icon: "success",
+              timer: 2000,
+              showConfirmButton: false,
+            });
+            navigate("/auth/login");
+          })
+          .catch((error) => {
+            console.error("Logout failed", error);
+            Swal.fire("Error", "Something went wrong during logout.", "error");
+          });
+      }
+    });
   };
 
   return (

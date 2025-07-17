@@ -6,6 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const Registration = () => {
   const { createUser, updateUserProfile } = useAuth();
@@ -22,8 +23,6 @@ const Registration = () => {
   const onSubmit = (data) => {
     createUser(data.email, data.password)
       .then((result) => {
-        const user = result.user;
-
         const userProfile = {
           displayName: data.name,
           photoURL: profilePic,
@@ -38,21 +37,34 @@ const Registration = () => {
               email: data.email,
               photoURL: profilePic,
               createdAt: new Date(),
-              membership: false, // <-- Add membership field
+              membership: false,
             };
 
             axios
               .post("http://localhost:3000/users", saveUser)
               .then(() => {
-                console.log("User saved to DB");
+                toast.success("Account created successfully!", {
+                  duration: 3000,
+                  style: {
+                    background: "#22c55e",
+                    color: "#fff",
+                  },
+                });
                 Navigate(from);
               })
-              .catch((err) => console.error("Failed to save user:", err));
+              .catch((err) => {
+                console.error("Failed to save user:", err);
+                toast.error("Error saving user to the database.");
+              });
           })
-          .catch((err) => console.log("Profile update error:", err));
+          .catch((err) => {
+            console.log("Profile update error:", err);
+            toast.error("Failed to update Firebase profile.");
+          });
       })
       .catch((err) => {
         console.log("Registration error:", err);
+        toast.error(err.message || "Registration failed.");
       });
   };
 

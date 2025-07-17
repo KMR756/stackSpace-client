@@ -5,6 +5,7 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { login } = useAuth();
@@ -16,13 +17,23 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
-    console.log(data);
     login(data.email, data.password)
       .then((result) => {
+        toast.success("login successfully!", {
+          duration: 3000,
+          style: {
+            background: "#22c55e",
+            color: "#fff",
+          },
+        });
         Navigate(from);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error(err);
+        toast.error("Invalid email or password.");
+      });
   };
 
   return (
