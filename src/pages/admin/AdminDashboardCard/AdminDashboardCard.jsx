@@ -38,20 +38,7 @@ const AdminDashboardCard = () => {
             </div>
           </div>
         </Link>
-        <Link to={`/dashboard/admin-dashboard/reported-comments`}>
-          <div class="group w-[18rem] sm:w-[20rem] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-            <img
-              class="w-full h-[14rem] object-cover"
-              src={ReportedComments}
-              alt="Sushi"
-            />
-            <div class="p-5">
-              <h2 class="lato text-2xl text-center font-bold  mb-1 group-hover:text-rose-600 ">
-                Reported Comments
-              </h2>
-            </div>
-          </div>
-        </Link>
+
         <Link to={`/dashboard/admin-dashboard/make-announcement`}>
           <div class="group w-[18rem] sm:w-[20rem] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
             <img
