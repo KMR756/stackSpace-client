@@ -1,29 +1,31 @@
-import { Link, useNavigate } from "react-router"; // Fix: use react-router-dom, not react-router
+import { Link, useNavigate } from "react-router"; // ✅ Correct import
 import useAuth from "../../../hooks/useAuth";
-import axios from "axios"; // Plain axios
+import axios from "axios"; // ✅ Plain axios
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const DropDown = () => {
   const { user, logOut } = useAuth();
-  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null); // ✅ Declare state
 
+  // ✅ Fetch user data using plain axios
   useEffect(() => {
-    if (user?.email) {
-      axiosSecure
-        .get(`http://localhost:3000/users/${user.email}`)
-        .then((res) => {
-          setUserData(res.data); // ✅ Save to state
-        })
-        .catch((error) => {
+    const fetchUserData = async () => {
+      if (user?.email) {
+        try {
+          const res = await axios.get(
+            `http://localhost:3000/users/${user.email}`
+          );
+          setUserData(res.data);
+        } catch (error) {
           console.error("Error fetching user data:", error);
-        });
-    }
-  }, [user?.email, axiosSecure]);
-  // console.log(userData);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [user?.email]);
 
   const handleLogout = () => {
     Swal.fire({
@@ -69,15 +71,26 @@ const DropDown = () => {
         className="lato dropdown-content menu bg-base-100 w-30 lg:w-40 rounded-box z-10 p-2 shadow-sm"
       >
         <p className="text-center my-2 text-sm lg:text-xl px-2 py-1 rounded-2xl bg-amber-200">
-          {userData?.name}
-
+          {user?.displayName}
           <p className="lato border-transparent text-xs mx-5 bg-blue-400 text-white font-semibold px-2 py-1 rounded-2xl mt-1">
-            {userData?.membership ? "Gold" : "Bronze"}
+            {userData?.role === "admin"
+              ? "Admin"
+              : userData?.membership
+              ? "Gold"
+              : "Bronze"}
           </p>
         </p>
 
         <li>
-          <Link to="/dashboard/user-dashboard">Dashboard</Link>
+          <Link
+            to={
+              userData?.role === "admin"
+                ? "/dashboard/admin-dashboard"
+                : "/dashboard/user-dashboard"
+            }
+          >
+            {userData?.role === "admin" ? "Admin Dashboard" : "Dashboard"}
+          </Link>
         </li>
         <li>
           <button onClick={handleLogout}>Logout</button>

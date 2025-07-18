@@ -5,9 +5,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const SocialLogin = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const from = location.state?.from?.pathname || "/";
+  const location = useLocation();
+
+  const from = location.state?.from || "/";
   const { singInWithGoogle } = useAuth();
 
   const handleGoogleSignIn = async () => {
@@ -20,7 +21,7 @@ const SocialLogin = () => {
           color: "#fff",
         },
       });
-      navigate(from);
+
       const loggedUser = result.user;
 
       const saveUser = {
@@ -32,8 +33,10 @@ const SocialLogin = () => {
         membership: false,
       };
 
-      await axios.post("http://localhost:3000/users", saveUser);
+      await axios.put("http://localhost:3000/users", saveUser);
+
       console.log("Google user saved to DB");
+      navigate(from);
     } catch (err) {
       toast.error(err);
     }
