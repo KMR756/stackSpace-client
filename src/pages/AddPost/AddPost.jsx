@@ -82,7 +82,7 @@ const AddPost = () => {
           setUserData(res.data); // ✅ Save to state
         })
         .catch((error) => {
-          // console.error("Error fetching user data:", error);
+          toast.error(error);
         });
     }
   }, [user?.email]);

@@ -105,7 +105,7 @@ const PaymentForm = () => {
   return (
     <div>
       {/* User Card */}
-      <div className="w-full lg:w-2/3 flex justify-center items-center flex-col border-transparent p-10 rounded-3xl bg-amber-100 mx-auto">
+      <div className="w-full lg:w-2/3 mt-10 flex justify-center items-center flex-col border-transparent p-10 rounded-3xl bg-amber-100 mx-auto">
         <img
           className="w-20 h-20 object-cover rounded-full"
           src={user.photoURL}

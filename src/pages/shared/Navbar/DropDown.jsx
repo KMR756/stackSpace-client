@@ -3,15 +3,17 @@ import useAuth from "../../../hooks/useAuth";
 import axios from "axios"; // Plain axios
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const DropDown = () => {
   const { user, logOut } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null); // ✅ Declare state
 
   useEffect(() => {
     if (user?.email) {
-      axios
+      axiosSecure
         .get(`http://localhost:3000/users/${user.email}`)
         .then((res) => {
           setUserData(res.data); // ✅ Save to state
@@ -20,7 +22,7 @@ const DropDown = () => {
           console.error("Error fetching user data:", error);
         });
     }
-  }, [user?.email]);
+  }, [user?.email, axiosSecure]);
   // console.log(userData);
 
   const handleLogout = () => {

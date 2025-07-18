@@ -26,6 +26,7 @@ const SocialLogin = () => {
       const saveUser = {
         name: loggedUser.displayName,
         email: loggedUser.email,
+        role: "user",
         photoURL: loggedUser.photoURL,
         createdAt: new Date(),
         membership: false,
@@ -34,7 +35,7 @@ const SocialLogin = () => {
       await axios.post("http://localhost:3000/users", saveUser);
       console.log("Google user saved to DB");
     } catch (err) {
-      // You might want to show an error message to the user here
+      toast.error(err);
     }
   };
 

@@ -20,7 +20,7 @@ const Login = () => {
 
   const onSubmit = (data) => {
     login(data.email, data.password)
-      .then((result) => {
+      .then(() => {
         toast.success("login successfully!", {
           duration: 3000,
           style: {

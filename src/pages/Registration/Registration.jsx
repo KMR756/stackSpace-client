@@ -22,7 +22,7 @@ const Registration = () => {
 
   const onSubmit = (data) => {
     createUser(data.email, data.password)
-      .then((result) => {
+      .then(() => {
         const userProfile = {
           displayName: data.name,
           photoURL: profilePic,
@@ -35,6 +35,7 @@ const Registration = () => {
             const saveUser = {
               name: data.name,
               email: data.email,
+              role: "user",
               photoURL: profilePic,
               createdAt: new Date(),
               membership: false,

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useLoaderData } from "react-router";
-import axios from "axios";
+
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const SinglePost = () => {
+  const axiosSecure = useAxiosSecure();
   const postData = useLoaderData();
   const { user } = useAuth();
 
@@ -27,7 +29,7 @@ const SinglePost = () => {
     try {
       setLoadingReplies((prev) => ({ ...prev, [idx]: true }));
 
-      await axios.post(`http://localhost:3000/posts/${post._id}/comment`, {
+      await axiosSecure.post(`/posts/${post._id}/comment`, {
         replyToIndex: idx,
         replyText,
         name: user.displayName,

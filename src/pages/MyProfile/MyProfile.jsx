@@ -2,10 +2,11 @@ import { useLoaderData } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import { FaArrowUp, FaArrowDown, FaComment, FaClock } from "react-icons/fa";
 import { formatDistanceToNow } from "date-fns";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyProfile = () => {
+  const axiosSecure = useAxiosSecure();
   const posts = useLoaderData();
   const { user } = useAuth();
   // Sort by createdAt (newest first) and take first 3
@@ -17,8 +18,8 @@ const MyProfile = () => {
 
   useEffect(() => {
     if (user?.email) {
-      axios
-        .get(`http://localhost:3000/users/${user.email}`)
+      axiosSecure
+        .get(`/users/${user.email}`)
         .then((res) => {
           setUserData(res.data); // ✅ Save to state
         })
@@ -26,7 +27,7 @@ const MyProfile = () => {
           console.error("Error fetching user data:", error);
         });
     }
-  }, [user?.email]);
+  }, [user?.email, axiosSecure]);
   console.log(userData);
 
   return (
@@ -50,7 +51,9 @@ const MyProfile = () => {
       </div>
 
       {recentPosts.length === 0 ? (
-        <p>You haven't posted anything yet.</p>
+        <p className="text-center text-navFooter text-2xl my-10">
+          You haven't posted anything yet.
+        </p>
       ) : (
         recentPosts.map((post) => (
           <div className="bg-white  my-7 w-4/5 mx-auto rounded-lg shadow-md overflow-hidden mb-6 transition-all hover:shadow-lg">
