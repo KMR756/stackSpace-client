@@ -5,7 +5,9 @@ import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
 
 const fetchAdminProfile = async (email) => {
-  const res = await axios.get(`http://localhost:3000/admin/${email}`);
+  const res = await axios.get(
+    `https://stack-space-server.vercel.app/admin/${email}`
+  );
   return res.data;
 };
 

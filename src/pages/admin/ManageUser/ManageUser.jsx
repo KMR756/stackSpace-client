@@ -5,12 +5,16 @@ import Swal from "sweetalert2";
 import Loading from "../../shared/Loading/Loading";
 
 const fetchUsers = async (search) => {
-  const res = await axios.get(`http://localhost:3000/users?search=${search}`);
+  const res = await axios.get(
+    `https://stack-space-server.vercel.app/users?search=${search}`
+  );
   return res.data;
 };
 
 const makeAdminRequest = async (id) => {
-  const res = await axios.patch(`http://localhost:3000/users/make-admin/${id}`);
+  const res = await axios.patch(
+    `https://stack-space-server.vercel.app/users/make-admin/${id}`
+  );
   return res.data;
 };
 

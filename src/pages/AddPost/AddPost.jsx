@@ -77,7 +77,7 @@ const AddPost = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:3000/users/${user.email}`)
+        .get(`https://stack-space-server.vercel.app/users/${user.email}`)
         .then((res) => {
           setUserData(res.data); // ✅ Save to state
         })

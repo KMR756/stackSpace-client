@@ -16,7 +16,7 @@ const Navbar = () => {
       if (user?.email) {
         try {
           const res = await axios.get(
-            `http://localhost:3000/users/${user.email}`
+            `https://stack-space-server.vercel.app/users/${user.email}`
           );
           setUserData(res.data);
         } catch (err) {

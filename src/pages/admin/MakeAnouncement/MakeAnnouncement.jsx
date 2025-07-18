@@ -13,7 +13,10 @@ const MakeAnnouncement = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post("http://localhost:3000/announcements", data);
+      const res = await axios.post(
+        "https://stack-space-server.vercel.app/announcements",
+        data
+      );
       if (res.data.insertedId) {
         Swal.fire("Success", "Announcement created!", "success");
         reset();

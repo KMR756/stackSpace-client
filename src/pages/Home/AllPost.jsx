@@ -23,7 +23,7 @@ const AllPost = ({ post }) => {
 
   const handleVote = async (type) => {
     if (!user?.email) return;
-    const endpoint = `http://localhost:3000/posts/${post._id}/${type}`;
+    const endpoint = `https://stack-space-server.vercel.app/posts/${post._id}/${type}`;
     try {
       await axios.patch(endpoint, { email: user.email });
 
@@ -59,10 +59,13 @@ const AllPost = ({ post }) => {
     }
 
     try {
-      await axios.post(`http://localhost:3000/posts/${post._id}/comment`, {
-        name: user.displayName,
-        commentText: newComment,
-      });
+      await axios.post(
+        `https://stack-space-server.vercel.app/posts/${post._id}/comment`,
+        {
+          name: user.displayName,
+          commentText: newComment,
+        }
+      );
       const comment = {
         name: user.displayName,
         commentText: newComment,

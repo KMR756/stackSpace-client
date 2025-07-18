@@ -6,7 +6,7 @@ const AnnouncementList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/announcements")
+      .get("https://stack-space-server.vercel.app/announcements")
       .then((res) => setAnnouncements(res.data))
       .catch((err) => console.error(err));
   }, []);

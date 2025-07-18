@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
-        loader: () => fetch("http://localhost:3000/posts"),
+        loader: () => fetch("https://stack-space-server.vercel.app/posts"),
         hydrateFallbackElement: <Loading></Loading>,
       },
     ],
@@ -54,9 +54,9 @@ export const router = createBrowserRouter([
       {
         path: "my-profile/:uid",
         loader: ({ params }) =>
-          axios(`http://localhost:3000/posts/user/${params.uid}`).then(
-            (res) => res.data
-          ),
+          axios(
+            `https://stack-space-server.vercel.app/posts/user/${params.uid}`
+          ).then((res) => res.data),
         hydrateFallbackElement: <Loading />,
         element: (
           <PrivateRoute>
@@ -76,9 +76,9 @@ export const router = createBrowserRouter([
       {
         path: "my-posts/:uid",
         loader: ({ params }) =>
-          axios(`http://localhost:3000/posts/user/${params.uid}`).then(
-            (res) => res.data
-          ),
+          axios(
+            `https://stack-space-server.vercel.app/posts/user/${params.uid}`
+          ).then((res) => res.data),
         hydrateFallbackElement: <Loading />,
         element: (
           <PrivateRoute>
@@ -89,9 +89,9 @@ export const router = createBrowserRouter([
       {
         path: "post/:id",
         loader: ({ params }) =>
-          axios(`http://localhost:3000/posts/${params.id}`).then(
-            (res) => res.data
-          ),
+          axios(
+            `https://stack-space-server.vercel.app/posts/${params.id}`
+          ).then((res) => res.data),
         hydrateFallbackElement: <Loading />,
         element: (
           <PrivateRoute>
@@ -132,9 +132,9 @@ export const router = createBrowserRouter([
       {
         path: "my-profile/:uid",
         loader: ({ params }) =>
-          axios(`http://localhost:3000/posts/user/${params.uid}`).then(
-            (res) => res.data
-          ),
+          axios(
+            `https://stack-space-server.vercel.app/posts/user/${params.uid}`
+          ).then((res) => res.data),
         hydrateFallbackElement: <Loading />,
         element: (
           <PrivateRoute>
@@ -153,9 +153,9 @@ export const router = createBrowserRouter([
       {
         path: "my-posts/:uid",
         loader: ({ params }) =>
-          axios(`http://localhost:3000/posts/user/${params.uid}`).then(
-            (res) => res.data
-          ),
+          axios(
+            `https://stack-space-server.vercel.app/posts/user/${params.uid}`
+          ).then((res) => res.data),
         hydrateFallbackElement: <Loading />,
         element: (
           <PrivateRoute>
@@ -166,9 +166,9 @@ export const router = createBrowserRouter([
       {
         path: "post/:id",
         loader: ({ params }) =>
-          axios(`http://localhost:3000/posts/${params.id}`).then(
-            (res) => res.data
-          ),
+          axios(
+            `https://stack-space-server.vercel.app/posts/${params.id}`
+          ).then((res) => res.data),
         hydrateFallbackElement: <Loading />,
         element: (
           <PrivateRoute>

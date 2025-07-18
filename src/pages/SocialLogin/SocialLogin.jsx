@@ -33,7 +33,7 @@ const SocialLogin = () => {
         membership: false,
       };
 
-      await axios.put("http://localhost:3000/users", saveUser);
+      await axios.put("https://stack-space-server.vercel.app/users", saveUser);
 
       console.log("Google user saved to DB");
       navigate(from);

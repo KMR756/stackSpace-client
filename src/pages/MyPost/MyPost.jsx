@@ -20,7 +20,7 @@ const MyPost = () => {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:3000/posts/${id}`);
+        await axios.delete(`https://stack-space-server.vercel.app/posts/${id}`);
         setPosts((prev) => prev.filter((post) => post._id !== id));
 
         Swal.fire({

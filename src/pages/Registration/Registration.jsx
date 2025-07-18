@@ -42,7 +42,7 @@ const Registration = () => {
             };
 
             axios
-              .post("http://localhost:3000/users", saveUser)
+              .post("https://stack-space-server.vercel.app/users", saveUser)
               .then(() => {
                 toast.success("Account created successfully!", {
                   duration: 3000,
