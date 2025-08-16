@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
@@ -26,35 +25,39 @@ const AdminProfile = () => {
   });
 
   if (authLoading || isLoading) {
-    return <p className="text-center mt-8">Loading admin profile...</p>;
+    return <p className="text-center mt-8 text-lg">Loading admin profile...</p>;
   }
 
   if (isError) {
     return (
-      <p className="text-red-500 text-center mt-8">
+      <p className="text-red-500 text-center mt-8 text-lg">
         {error?.response?.data?.message || "Failed to load admin profile."}
       </p>
     );
   }
 
   return (
-    <div className="w-full lg:w-2/3 mx-auto my-10 p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-5xl text-center text-navFooter font-bold mb-6">
-        Admin Profile
-      </h2>
-      <div className="flex justify-center items-center flex-col border-transparent p-10 rounded-3xl bg-amber-100 md:mx-20 lg:mx-30 xl:mx-60">
-        <div>
+    <div className="flex justify-center my-10 px-4">
+      <div className="w-full max-w-3xl bg-white rounded-3xl shadow-lg p-8 md:p-12">
+        <h2 className="text-4xl md:text-5xl font-bold text-center text-navFooter mb-8">
+          Admin Profile
+        </h2>
+
+        {/* Profile Card */}
+        <div className="flex flex-col items-center bg-amber-100 rounded-3xl p-10">
           <img
-            className="w-20 h-20 object-cover rounded-full"
-            src={admin.photoURL}
-            alt={admin.displayName}
+            className="w-24 h-24 md:w-32 md:h-32 object-cover rounded-full mb-4"
+            src={admin.photoURL || user.photoURL}
+            alt={admin.displayName || user.displayName}
           />
+          <h3 className="text-2xl font-bold mb-1">
+            {admin.displayName || user.displayName}
+          </h3>
+          <p className="text-gray-700 mb-2">{user.email}</p>
+          <span className="bg-blue-400 text-white font-semibold px-4 py-1 rounded-full">
+            Admin
+          </span>
         </div>
-        <h1 className="lato font-bold mt-3 text-xl">{user.displayName}</h1>
-        <h1 className="lato mt-2">{user.email}</h1>
-        <p className="lato border-transparent bg-blue-400 text-white font-semibold px-2 py-1 rounded-2xl mt-2">
-          Admin
-        </p>
       </div>
     </div>
   );

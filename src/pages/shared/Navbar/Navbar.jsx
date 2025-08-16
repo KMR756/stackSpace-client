@@ -18,6 +18,7 @@ const fetchUserData = async (email) => {
 
 const Navbar = () => {
   const { user } = useAuth();
+
   const { uid } = useParams();
   // 🔹 Fetch user data with React Query
   const { data: userData } = useQuery({
@@ -25,6 +26,7 @@ const Navbar = () => {
     queryFn: () => fetchUserData(user.email),
     enabled: !!user?.email,
   });
+  console.log(userData);
 
   // 🔹 Common nav link style
   const linkStyle = ({ isActive }) =>
@@ -51,13 +53,23 @@ const Navbar = () => {
           </NavLink>
         </li>
       )}
-      {user && (
+      {userData?.role === "user" && (
         <li>
           <NavLink
             to={"/dashboard/user-dashboard"} // ✅ use user.email directly
             className={linkStyle}
           >
             Dashboard
+          </NavLink>
+        </li>
+      )}
+      {userData?.role === "admin" && (
+        <li>
+          <NavLink
+            to={"/dashboard/admin-dashboard"} // ✅ use user.email directly
+            className={linkStyle}
+          >
+            Admin Dashboard
           </NavLink>
         </li>
       )}

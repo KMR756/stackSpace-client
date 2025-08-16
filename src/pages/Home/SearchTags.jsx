@@ -9,14 +9,14 @@ const SearchTags = ({ posts, onTagClick, selectedTag }) => {
   return (
     <>
       <AnnouncementList />
-      <div className="flex flex-wrap gap-2 justify-center my-6">
+      <div className="flex flex-wrap gap-2 justify-center my-6 ">
         {/* All Posts Button */}
         <button
           onClick={() => onTagClick("")}
           className={`text-sm px-3 py-1 rounded-full transition ${
             selectedTag === ""
-              ? "bg-blue-800 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              ? "bg-Primary text-white"
+              : "bg-[#52225820] text-gray-700 hover:bg-gray-300"
           }`}
         >
           All Posts
@@ -31,8 +31,8 @@ const SearchTags = ({ posts, onTagClick, selectedTag }) => {
               onClick={() => onTagClick(tag.toLowerCase())}
               className={`text-sm px-3 py-1 rounded-full transition ${
                 isSelected
-                  ? "bg-blue-800 text-white"
-                  : "bg-blue-100 text-blue-800 hover:bg-blue-200"
+                  ? "bg-Primary text-white"
+                  : "bg-[#52225820] text-gray-700 hover:bg-gray-300"
               }`}
             >
               {tag}
