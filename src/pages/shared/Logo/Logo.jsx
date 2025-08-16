@@ -12,10 +12,10 @@ const Logo = () => {
           </div>
           <div className="flex flex-col justify-end lg:mt-4">
             <p className="barlow-condensed font-black  text-2xl lg:text-4xl text-Text text-bold">
-              <span className="lg:text-5xl">S</span>tack
-              <span className="lg:text-5xl">S</span>pace
+              <span className="lg:text-3xl">S</span>tack
+              <span className="lg:text-3xl">S</span>pace
             </p>
-            <p className="lato text-end font-semibold  text-white text-[10px] lg:text-xl  ">
+            <p className="lato text-end font-semibold  text-white text-[10px] lg:text-xs  ">
               Tech Threads...
             </p>
           </div>

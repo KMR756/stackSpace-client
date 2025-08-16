@@ -12,12 +12,11 @@
 }
 
 @theme {
-  --color-Primary: #4f46e5;
-  --color-Secondary: #6366f1;
+  --color-Primary: #522258;
+  --color-Secondary: #c63c51;
   --color-Accent: #f59e0b;
   --color-Background: #f9fafb;
-  --color-Text: #111827;
-  --color-navFooter: #8e4585;
+  --color-Text: #ffffff;
 }
 
 @layer components {
