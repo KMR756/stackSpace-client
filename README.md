@@ -2,8 +2,9 @@
 
 A modern Forum Web Application built with the **MERN stack** (MongoDB, Express, React, Node.js), offering a scalable and interactive platform for users to post, comment, vote, and engage in conversations. Designed with performance, responsiveness, and user experience in mind.
 
-🔹 Features
 live link : https://stack-space-2daaf.web.app/
+
+🔹 Features
 User Authentication & Profiles
 
   * Sign up / Login with email & password
