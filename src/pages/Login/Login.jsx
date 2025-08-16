@@ -38,20 +38,20 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
-      <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
+      <div className="max-w-screen-xl m-0 sm:m-10 bg-Primary shadow sm:rounded-lg flex justify-center flex-1">
         <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
           <div className="flex justify-center">
             <Logo />
           </div>
           <div className="mt-12 flex flex-col items-center">
-            <h1 className="lato text-2xl xl:text-3xl font-extrabold">
+            <h1 className="lato text-white text-2xl xl:text-3xl font-extrabold">
               LogIn now
             </h1>
             <div className="w-full flex-1 mt-8">
               <SocialLogin />
 
               <div className="my-12 border-b text-center">
-                <div className="lato leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
+                <div className="lato leading-none px-2 inline-block text-sm  tracking-wide font-medium  text-white transform translate-y-1/2">
                   Or login with e-mail
                 </div>
               </div>
@@ -80,7 +80,7 @@ const Login = () => {
                       password is required.
                     </p>
                   )}
-                  <button className="mt-5 tracking-wide font-semibold bg-[#8f5989]  text-gray-100 w-full py-4 rounded-lg hover:bg-navFooter transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                  <button className="mt-5 tracking-wide font-semibold bg-Secondary  text-gray-100 w-full py-4 rounded-lg hover:bg-navFooter transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
                     <svg
                       className="w-6 h-6 -ml-2"
                       fill="none"
@@ -95,7 +95,7 @@ const Login = () => {
                     </svg>
                     <span className="lato ml-3">logIn</span>
                   </button>
-                  <p className="lato mt-6 text-xs text-gray-600 text-center">
+                  <p className="lato mt-6 text-xs text-white text-center">
                     Don't have an account?{" "}
                     <Link to={"/auth/registration"}>Registration</Link>
                   </p>
@@ -104,7 +104,7 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <div className="flex-1 bg-indigo-100 text-center hidden lg:flex">
+        <div className="flex-1 bg-[#57195f] text-center hidden lg:flex">
           <div className="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat">
             <img src={loginPic} alt="" />
           </div>
