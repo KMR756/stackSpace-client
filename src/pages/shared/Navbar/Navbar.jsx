@@ -31,8 +31,8 @@ const Navbar = () => {
   // 🔹 Common nav link style
   const linkStyle = ({ isActive }) =>
     isActive
-      ? "lato btn btn-neutral text-sm lg:text-xl text-text"
-      : "lato btn btn-neutral btn-outline text-sm lg:text-xl text-text";
+      ? "lato btn btn-neutral text-sm lg:text-xl text-white bg-Secondary"
+      : "lato btn btn-neutral btn-outline text-sm lg:text-xl text-white hover:bg-Secondary";
 
   const navItems = (
     <>
