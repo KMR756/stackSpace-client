@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "../Logo/Logo";
 
 const Footer = () => (
-  <footer className="footer footer-horizontal footer-center bg-navFooter text-primary-content p-10">
+  <footer className="footer footer-horizontal footer-center bg-Primary text-primary-content p-10">
     <aside>
       <Logo />
       <p className="lato font-bold">Providing reliable tech since 1992</p>

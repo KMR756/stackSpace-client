@@ -156,14 +156,6 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "admin-dashboard/make-announcement",
-        element: (
-          <PrivateRoute>
-            <MakeAnnouncement />
-          </PrivateRoute>
-        ),
-      },
     ],
   },
 

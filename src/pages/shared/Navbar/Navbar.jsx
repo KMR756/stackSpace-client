@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useParams } from "react-router";
+
 import { IoNotificationsOutline } from "react-icons/io5";
 import Logo from "../Logo/Logo";
 import useAuth from "../../../hooks/useAuth";
@@ -17,7 +18,7 @@ const fetchUserData = async (email) => {
 
 const Navbar = () => {
   const { user } = useAuth();
-
+  const { uid } = useParams();
   // 🔹 Fetch user data with React Query
   const { data: userData } = useQuery({
     queryKey: ["user", user?.email],
@@ -50,7 +51,16 @@ const Navbar = () => {
           </NavLink>
         </li>
       )}
-
+      {user && (
+        <li>
+          <NavLink
+            to={"/dashboard/user-dashboard"} // ✅ use user.email directly
+            className={linkStyle}
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      )}
       <li>
         <NavLink to="/about" className={linkStyle}>
           About Us
